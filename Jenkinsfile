@@ -55,7 +55,7 @@ pipeline{
                     
                     withSonarQubeEnv(credentialsId: 'sonarr') {
                         
-                        shsh "${mvnHome}/bin/mvn clean package sonar:sonar'
+                        sh "${mvnHome}/bin/mvn clean package sonar:sonar'
                     }
                    }
                     
