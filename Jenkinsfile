@@ -1,6 +1,8 @@
 pipeline{
     
     agent any 
+    def mvnHome = tool name: 'maven-3.8.7', type: 'maven'
+                    
     
     stages {
         
@@ -20,7 +22,7 @@ pipeline{
                 
                 script{
                     
-                    sh 'mvn test'
+                    sh "${mvnHome}/bin/mvn test"
                 }
             }
         }
@@ -30,7 +32,7 @@ pipeline{
                 
                 script{
                     
-                    sh 'mvn verify -DskipUnitTests'
+                    sh "${mvnHome}/bin/mvn verify -DskipUnitTests"
                 }
             }
         }
@@ -40,7 +42,7 @@ pipeline{
                 
                 script{
                     
-                    sh 'mvn clean install'
+                    sh "${mvnHome}/bin/mvn clean install'
                 }
             }
         }
@@ -52,7 +54,7 @@ pipeline{
                     
                     withSonarQubeEnv(credentialsId: 'sonarr') {
                         
-                        sh 'mvn clean package sonar:sonar'
+                        shsh "${mvnHome}/bin/mvn clean package sonar:sonar'
                     }
                    }
                     
