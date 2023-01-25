@@ -1,8 +1,7 @@
 pipeline{
     
     agent any 
-    def mvnHome = tool name: "maven-3.8.7", type: "maven"
-                  
+              
     stages {
         
         stage('Git Checkout'){
@@ -16,12 +15,14 @@ pipeline{
             }
         }
         stage('UNIT testing'){
+           def mvnHome = tool name: "maven-3.8.7", type: "maven"
+            def mvncmd ="${mvnHome}/bin/mvn"
             
             steps{
                 
                 script{
                     
-                    sh "${mvnHome}/bin/mvn test"
+                    sh "${mvncmd} install"
                 }
             }
         }
@@ -48,6 +49,8 @@ pipeline{
         }
         */
         stage('Static code analysis'){
+            def mvnHome = tool name: "maven-3.8.7", type: "maven"
+            def mvncmd ="${mvnHome}/bin/mvn"
             
             steps{
                 
@@ -55,7 +58,7 @@ pipeline{
                     
                     withSonarQubeEnv(credentialsId: 'sonarr') {
                         
-                        sh "${mvnHome}/bin/mvn clean package sonar:sonar"
+                        sh "${mvncmd} clean package sonar:sonar"
                     }
                    }
                     
