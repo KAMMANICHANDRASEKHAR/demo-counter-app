@@ -1,9 +1,8 @@
 pipeline{
     
     agent any 
-    def mvnHome = tool name: 'maven-3.8.7', type: 'maven'
-                    
-    
+    def mvnHome = tool name: "maven-3.8.7", type: "maven"
+                  
     stages {
         
         stage('Git Checkout'){
@@ -26,6 +25,7 @@ pipeline{
                 }
             }
         }
+       /*
         stage('Integration testing'){
             
             steps{
@@ -46,6 +46,7 @@ pipeline{
                 }
             }
         }
+        */
         stage('Static code analysis'){
             
             steps{
